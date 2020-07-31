@@ -73,13 +73,13 @@ public class PageObjectMarketYandex {
         try {
             buttonShowMorePages = driver.findElement(By.xpath(selectorXpathButtonShowMorePages));
             System.out.println("try");
-            try {
+            /*try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
 //            waitForLoad(driver);
-            buttonShowMorePages.click();
+//            buttonShowMorePages.click();
         } catch (Exception e) {
             System.out.println("catch");
             buttonShowMorePages = null;

@@ -15,17 +15,24 @@ public class Tests extends WebDriverSettings {
         PageObjectMarketYandex pageObjectMarketYandex = new PageObjectMarketYandex(chromeDriver, "телефоны");
         pageObjectMarketYandex.setFilterCheckBoxBoxIOs();
 
-        int i = 1;
+//        int i = 1;
 //        pageObjectMarketYandex.getTitleFromWebItems();
-
-        do {
+        while (pageObjectMarketYandex.isExistsButtonShowMorePages()) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            pageObjectMarketYandex.getButtonShowMorePages().click();
+        }
+        /*do {
             if (pageObjectMarketYandex.isExistsButtonShowMorePages()) {
 
 //                pageObjectMarketYandex.clickButton();
 //                pageObjectMarketYandex.getTitleFromWebItems();
 
             } else break;
-        } while (true);
+        } while (true);*/
         Assertions.assertTrue(pageObjectMarketYandex.isTitleContainsIPhone());
 //        pageObjectMarketYandex.checkTitle();
     }
