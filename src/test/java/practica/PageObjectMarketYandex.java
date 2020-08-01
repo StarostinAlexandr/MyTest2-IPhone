@@ -3,17 +3,15 @@ package practica;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.json.JsonOutput;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PageObjectMarketYandex {
-    //    private String selectorSearchItems="//h2[@class='organic__title-wrapper typo typo_text_l typo_line_m']";
-//    private String selectorSearchItems = "//article";
-//    private String selectorCssCheckBoxIOs = "[name='Платформа iOS'][type=checkbox]";
-    //    private String selectorXpathDivResultPages = "//div[contains(@data-bem,\"itemsPerPage\")]";
 
-    private String selectorXpathCheckBoxIOs = "//span[text()='iOS']";
+    private String selectorXpathTextCheckBoxIOs = "//span[text()='iOS']";
+    private String selectorXpathCheckBoxIOs = "//input[@name='Платформа iOS'][@type='checkbox']";
     private String selectorXpathArticleText = "//article//h3/a";
     private String selectorXpathPhonesText = "//span[text()='телефоны']";
     private String selectorXpathButtonShowMorePages = "//button[text()='Показать ещё']";
@@ -22,6 +20,7 @@ public class PageObjectMarketYandex {
     private List<WebElement> searchWebItems = new ArrayList<>();
     private List<String> collectResults = new ArrayList<>();
     private WebElement filterCheckBoxIOs;
+    private WebElement filterTextCheckBoxIOs;
     private WebElement buttonShowMorePages;
     private WebElement textPhones;
 
@@ -38,11 +37,19 @@ public class PageObjectMarketYandex {
         return buttonShowMorePages;
     }
 
+    public WebElement getFilterCheckBoxIOs() {
+        return filterCheckBoxIOs=driver.findElement(By.xpath(selectorXpathCheckBoxIOs));
+    }
+
     public void setFilterCheckBoxBoxIOs() {
+        filterTextCheckBoxIOs = driver.findElement(By.xpath(selectorXpathTextCheckBoxIOs));
         filterCheckBoxIOs = driver.findElement(By.xpath(selectorXpathCheckBoxIOs));
+        System.out.println("1 -" + filterCheckBoxIOs.isSelected());
         if (!filterCheckBoxIOs.isSelected()) {
-            filterCheckBoxIOs.click();
+            filterTextCheckBoxIOs.click();
         }
+        System.out.println("2 -" + filterCheckBoxIOs.isSelected());
+
     }
 
     public boolean isExistsPhoneTextWhenPhonesSelected() {

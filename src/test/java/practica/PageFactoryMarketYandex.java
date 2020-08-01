@@ -12,6 +12,12 @@ import java.util.List;
 
 public class PageFactoryMarketYandex {
 
+    @FindBy(how = How.XPATH, using="//span[text()='телефоны']")
+    WebElement textPhones;
+
+    @FindBy(how = How.XPATH, using="//input[@name='Платформа iOS'][@type='checkbox']")
+    WebElement checkboxSetIOS;
+
     @FindBy(how = How.XPATH, using="//span[text()='iOS']")
     WebElement buttonSetIOS;
 
@@ -22,16 +28,34 @@ public class PageFactoryMarketYandex {
     private List<WebElement> searchWebItems = new ArrayList<>();
 
     WebElement filterCheckBoxIOs;
+
     private List<String> collectResults = new ArrayList<>();
 
 
     public List<String> getCollectResults() {
-        searchWebItems.stream().forEach(x->collectResults.add(x.getAttribute("title")));
+        searchWebItems.forEach(x->collectResults.add(x.getAttribute("title")));
         return collectResults;
     }
 
+    public WebElement getCheckboxSetIOS() {
+        return checkboxSetIOS;
+    }
+
+    public boolean isExistsPhoneTextWhenPhonesSelected() {
+        try {
+            textPhones.isDisplayed();
+            System.out.println("try find text phones");
+
+        } catch (Exception e) {
+            System.out.println("catch");
+            textPhones = null;
+        }
+        System.out.println("return " + (textPhones != null));
+        return textPhones != null;
+    }
+
     public void setFilterCheckBoxBoxIOs() {
-        if (!buttonSetIOS.isSelected()) {
+        if (!checkboxSetIOS.isSelected()) {
             buttonSetIOS.click();
         }
     }

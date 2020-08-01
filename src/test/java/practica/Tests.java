@@ -13,9 +13,21 @@ public class Tests extends WebDriverSettings {
     public void testPOMarketYandexTelephonesCheckIPhone() {
 
         PageObjectMarketYandex pageObjectMarketYandex = new PageObjectMarketYandex(chromeDriver, "телефоны");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Steps.checkMarketYandexPhonesSelected(pageObjectMarketYandex.isExistsPhoneTextWhenPhonesSelected(), chromeDriver);
 
         pageObjectMarketYandex.setFilterCheckBoxBoxIOs();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Steps.checkSetFilterIOS(pageObjectMarketYandex.getFilterCheckBoxIOs(), chromeDriver);
+
         while (pageObjectMarketYandex.isExistsButtonShowMorePages()) {
             try {
                 Thread.sleep(3000);
@@ -49,10 +61,15 @@ public class Tests extends WebDriverSettings {
     @Description(value = "В яндекс маркете выбрать телефоны." +
             " Установить фильтр (checkbox) iOS (айфон)." +
             " Убедится что на всех страницах (если их несколько), присутствуют только айфоны. ")
-    public void testPFMarketYandexTelephonesCheckIOS() {
+    public void testPFMarketYandexTelephonesCheckIPhone() {
         chromeDriver.get("https://market.yandex.ru/catalog--mobilnye-telefony/54726/list?text=телефоны");
         PageFactoryMarketYandex pageFactoryYandex = PageFactory.initElements(chromeDriver, PageFactoryMarketYandex.class);
+
+        Steps.checkMarketYandexPhonesSelected(pageFactoryYandex.isExistsPhoneTextWhenPhonesSelected(), chromeDriver);
+
         pageFactoryYandex.setFilterCheckBoxBoxIOs();
+        Steps.checkSetFilterIOS(pageFactoryYandex.getCheckboxSetIOS(), chromeDriver);
+
         while (pageFactoryYandex.isExistsButtonShowMorePages()) {
             try {
                 Thread.sleep(3000);

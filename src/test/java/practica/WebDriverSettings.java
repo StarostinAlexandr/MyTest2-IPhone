@@ -24,7 +24,7 @@ public class WebDriverSettings {
 
     @AfterEach
     public void closeBrowser(){
-//        chromeDriver.quit();
+        chromeDriver.quit();
     }
 
 
