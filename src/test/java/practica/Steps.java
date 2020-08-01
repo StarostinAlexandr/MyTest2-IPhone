@@ -24,15 +24,13 @@ public class Steps {
     @Step("Шаг 1. Негативный. Проверка выбора телефонов ")
     public static void checkMarketYandexPhonesSelectedNegative(boolean isExistsPhoneText, WebDriver driver){
         if(isExistsPhoneText){
-            Assertions.assertFalse(true
-                    , "Телефоны не должны быть выбраны");
+            Assertions.fail("Телефоны не должны быть выбраны");
             CustomUtils.getScreen(driver);
         }
         else {
             Assertions.assertFalse(false);
         }
     }
-
 
     @Step("Шаг 2. Проверка наличия имени: {name}")
     public static void checkContainsName(List<String> resultSearch, String name, WebDriver driver){
@@ -42,14 +40,14 @@ public class Steps {
         }
         else {
             CustomUtils.getScreen(driver);
-            Assertions.assertTrue(false,"Не найдено: "+ name);
+            Assertions.fail("Не найдено: " + name);
         }
     }
 
     @Step("Шаг 2. Проверка наличия имени: {name} (негативный тест)")
     public static void checkContainsNameNegative(List<String> resultSearch, String name, WebDriver driver){
         if(resultSearch.stream().peek(System.out::println).allMatch(x -> x.toLowerCase().contains(name))){
-            Assertions.assertFalse(true, "Если не выбраны " + name + " nо Все телефоны не могут быть "+ name);
+            Assertions.fail("Если не выбраны " + name + " nо Все телефоны не могут быть " + name);
             CustomUtils.getScreen(driver);
         }
         else {
