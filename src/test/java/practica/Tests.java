@@ -53,7 +53,7 @@ public class Tests extends WebDriverSettings {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Steps.checkContainsNameNegative(pageObjectMarketYandex.getCollectResults(), "iphone" , chromeDriver);
+        Steps.checkContainsNameNegative(pageObjectMarketYandex.getCollectResults(), "iphone", chromeDriver);
 
     }
 
@@ -88,8 +88,7 @@ public class Tests extends WebDriverSettings {
         chromeDriver.get("https://market.yandex.ru/catalog--mobilnye-telefony/54726/list?text=телефоны");
         PageFactoryMarketYandex pageFactoryYandex = PageFactory.initElements(chromeDriver, PageFactoryMarketYandex.class);
 
-        Steps.checkContainsNameNegative(pageFactoryYandex.getCollectResults(), "iphone" , chromeDriver);
-
+        Steps.checkContainsNameNegative(pageFactoryYandex.getCollectResults(), "iphone", chromeDriver);
     }
 }
 

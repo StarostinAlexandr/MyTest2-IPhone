@@ -12,19 +12,19 @@ import java.util.List;
 
 public class PageFactoryMarketYandex {
 
-    @FindBy(how = How.XPATH, using="//span[text()='телефоны']")
+    @FindBy(how = How.XPATH, using = "//span[text()='телефоны']")
     WebElement textPhones;
 
-    @FindBy(how = How.XPATH, using="//input[@name='Платформа iOS'][@type='checkbox']")
+    @FindBy(how = How.XPATH, using = "//input[@name='Платформа iOS'][@type='checkbox']")
     WebElement checkboxSetIOS;
 
-    @FindBy(how = How.XPATH, using="//span[text()='iOS']")
+    @FindBy(how = How.XPATH, using = "//span[text()='iOS']")
     WebElement buttonSetIOS;
 
-    @FindBy(how = How.XPATH, using="//button[text()='Показать ещё']")
+    @FindBy(how = How.XPATH, using = "//button[text()='Показать ещё']")
     WebElement buttonShowMorePages;
 
-    @FindAll(@FindBy(how = How.XPATH, using="//article//h3/a"))
+    @FindAll(@FindBy(how = How.XPATH, using = "//article//h3/a"))
     private List<WebElement> searchWebItems = new ArrayList<>();
 
     WebElement filterCheckBoxIOs;
@@ -33,7 +33,7 @@ public class PageFactoryMarketYandex {
 
 
     public List<String> getCollectResults() {
-        searchWebItems.forEach(x->collectResults.add(x.getAttribute("title")));
+        searchWebItems.forEach(x -> collectResults.add(x.getAttribute("title")));
         return collectResults;
     }
 
@@ -44,13 +44,9 @@ public class PageFactoryMarketYandex {
     public boolean isExistsPhoneTextWhenPhonesSelected() {
         try {
             textPhones.isDisplayed();
-            System.out.println("try find text phones");
-
         } catch (Exception e) {
-            System.out.println("catch");
             textPhones = null;
         }
-        System.out.println("return " + (textPhones != null));
         return textPhones != null;
     }
 
@@ -59,16 +55,13 @@ public class PageFactoryMarketYandex {
             buttonSetIOS.click();
         }
     }
+
     public boolean isExistsButtonShowMorePages() {
         try {
             buttonShowMorePages.isDisplayed();
-            System.out.println("try");
-
         } catch (Exception e) {
-            System.out.println("catch");
             buttonShowMorePages = null;
         }
-        System.out.println("return " + (buttonShowMorePages != null));
         return buttonShowMorePages != null;
     }
 

@@ -38,58 +38,38 @@ public class PageObjectMarketYandex {
     }
 
     public WebElement getFilterCheckBoxIOs() {
-        return filterCheckBoxIOs=driver.findElement(By.xpath(selectorXpathCheckBoxIOs));
+        return filterCheckBoxIOs = driver.findElement(By.xpath(selectorXpathCheckBoxIOs));
     }
 
     public void setFilterCheckBoxBoxIOs() {
         filterTextCheckBoxIOs = driver.findElement(By.xpath(selectorXpathTextCheckBoxIOs));
         filterCheckBoxIOs = driver.findElement(By.xpath(selectorXpathCheckBoxIOs));
-        System.out.println("1 -" + filterCheckBoxIOs.isSelected());
         if (!filterCheckBoxIOs.isSelected()) {
             filterTextCheckBoxIOs.click();
         }
-        System.out.println("2 -" + filterCheckBoxIOs.isSelected());
-
     }
 
     public boolean isExistsPhoneTextWhenPhonesSelected() {
         try {
             textPhones = driver.findElement(By.xpath(selectorXpathPhonesText));
-            System.out.println("try find text phones");
-
         } catch (Exception e) {
-            System.out.println("catch");
             textPhones = null;
         }
-        System.out.println("return " + (textPhones != null));
         return textPhones != null;
     }
 
     public boolean isExistsButtonShowMorePages() {
         try {
             buttonShowMorePages = driver.findElement(By.xpath(selectorXpathButtonShowMorePages));
-            System.out.println("try");
-
         } catch (Exception e) {
-            System.out.println("catch");
             buttonShowMorePages = null;
         }
-        System.out.println("return " + (buttonShowMorePages != null));
         return buttonShowMorePages != null;
     }
 
     public void collectResultByTitle() {
         searchWebItems = driver.findElements(By.xpath(selectorXpathArticleText));
-        System.out.println("getTitle 2 " + searchWebItems.size());
         searchWebItems.forEach(x -> collectResults.add(x.getAttribute("title")));
-        System.out.println("getTitle 3 " + collectResults.size());
-        int i = 1;
-        for (String str : collectResults) {
-            System.out.println(i + " " + str);
-            i++;
-        }
-//        return collectResults.stream().anyMatch(x -> x.contains("iPhone"));
-
     }
 
 }
