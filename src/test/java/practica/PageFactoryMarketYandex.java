@@ -12,14 +12,40 @@ import java.util.List;
 
 public class PageFactoryMarketYandex {
 
-    @FindAll(@FindBy(how = How.XPATH, using="//h2[@class=\"organic__title-wrapper typo typo_text_l typo_line_m\"]"))
+    @FindBy(how = How.XPATH, using="//span[text()='iOS']")
+    WebElement buttonSetIOS;
+
+    @FindBy(how = How.XPATH, using="//button[text()='Показать ещё']")
+    WebElement buttonShowMorePages;
+
+    @FindAll(@FindBy(how = How.XPATH, using="//article//h3/a"))
     private List<WebElement> searchWebItems = new ArrayList<>();
 
+    WebElement filterCheckBoxIOs;
     private List<String> collectResults = new ArrayList<>();
 
+
     public List<String> getCollectResults() {
-        searchWebItems.stream().forEach(x->collectResults.add(x.getText()));
+        searchWebItems.stream().forEach(x->collectResults.add(x.getAttribute("title")));
         return collectResults;
+    }
+
+    public void setFilterCheckBoxBoxIOs() {
+        if (!buttonSetIOS.isSelected()) {
+            buttonSetIOS.click();
+        }
+    }
+    public boolean isExistsButtonShowMorePages() {
+        try {
+            buttonShowMorePages.isDisplayed();
+            System.out.println("try");
+
+        } catch (Exception e) {
+            System.out.println("catch");
+            buttonShowMorePages = null;
+        }
+        System.out.println("return " + (buttonShowMorePages != null));
+        return buttonShowMorePages != null;
     }
 
 }

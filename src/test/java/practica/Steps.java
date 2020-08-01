@@ -3,29 +3,30 @@ package practica;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.json.JsonOutput;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.List;
 import java.util.Map;
 
 public class Steps {
 
-    @Step("Шаг 1. Проверка что результатов больше трёх ")
-    public static void checkYandexResultMoreThanThree(List<String> resultSearch, WebDriver driver){
-        if(resultSearch.size() > 3){
+    @Step("Шаг 1. Позитивный. Проверка выбора телефонов ")
+    public static void checkMarketYandexPhonesSelected(boolean isExistsPhoneText, WebDriver driver){
+        if(isExistsPhoneText){
             Assertions.assertTrue(true);
         }
         else {
             CustomUtils.getScreen(driver);
             Assertions.assertTrue(false
-                    , "Список с результатом поиска имеет размер не более трёх элементов");
+                    , "Телефоны не выбраны");
         }
     }
-
-    @Step("Шаг 1. Проверка что результате список не должен быть больше нуля (негативный тест)")
-    public static void checkYandexResultMoreThanZeroNegative(List<String> resultSearch, WebDriver driver){
-        if(resultSearch.size() > 0){
+    @Step("Шаг 1. Негативный. Проверка выбора телефонов ")
+    public static void checkMarketYandexPhonesSelectedNegative(boolean isExistsPhoneText, WebDriver driver){
+        if(isExistsPhoneText){
             Assertions.assertFalse(true
-                    , "Список с результатом поиска не должен быть больше нуля ");
+                    , "Телефоны не должны быть выбраны");
             CustomUtils.getScreen(driver);
         }
         else {
@@ -33,10 +34,12 @@ public class Steps {
         }
     }
 
+
     @Step("Шаг 2. Проверка наличия имени: {name}")
     public static void checkContainsName(List<String> resultSearch, String name, WebDriver driver){
-        if(resultSearch.stream().anyMatch(x -> x.contains(name))){
+        if(resultSearch.stream().peek(System.out::println).allMatch(x -> x.toLowerCase().contains(name))){
             Assertions.assertTrue(true);
+            System.out.println();
         }
         else {
             CustomUtils.getScreen(driver);
