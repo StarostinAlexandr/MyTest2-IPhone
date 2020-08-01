@@ -31,11 +31,17 @@ public class Tests extends WebDriverSettings {
 
 
     @Test
-    @Description(value = "В яндекс маркете выбрать ынофелет." +
-            " Убедится что не выбраны телефоны ")
-    public void testPOMarketYandexTelephonesNegative() {
-        PageObjectMarketYandex pageObjectMarketYandex = new PageObjectMarketYandex(chromeDriver, "ынофелет");
-        Steps.checkMarketYandexPhonesSelectedNegative(pageObjectMarketYandex.isExistsPhoneTextWhenPhonesSelected(), chromeDriver);
+    @Description(value = "В яндекс маркете выбрать телефоны." +
+            " Убедится что не если не выбран iOS то все телефоны не могут быть айфоны ")
+    public void testPOMarketYandexTelephonesIsIPhoneNegative() {
+        PageObjectMarketYandex pageObjectMarketYandex = new PageObjectMarketYandex(chromeDriver, "телефон");
+        pageObjectMarketYandex.collectResultByTitle();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Steps.checkContainsNameNegative(pageObjectMarketYandex.getCollectResults(), "iphone" , chromeDriver);
 
     }
 
@@ -43,7 +49,7 @@ public class Tests extends WebDriverSettings {
     @Description(value = "В яндекс маркете выбрать телефоны." +
             " Установить фильтр (checkbox) iOS (айфон)." +
             " Убедится что на всех страницах (если их несколько), присутствуют только айфоны. ")
-    public void testPFYandexTelephonesCheckIOS() {
+    public void testPFMarketYandexTelephonesCheckIOS() {
         chromeDriver.get("https://market.yandex.ru/catalog--mobilnye-telefony/54726/list?text=телефоны");
         PageFactoryMarketYandex pageFactoryYandex = PageFactory.initElements(chromeDriver, PageFactoryMarketYandex.class);
         pageFactoryYandex.setFilterCheckBoxBoxIOs();
@@ -58,5 +64,15 @@ public class Tests extends WebDriverSettings {
         Steps.checkContainsName(pageFactoryYandex.getCollectResults(), "iphone", chromeDriver);
     }
 
+    @Test
+    @Description(value = "В яндекс маркете выбрать телефоны." +
+            " Убедится что не если не выбран iOS то все телефоны не могут быть айфоны ")
+    public void testPFMarketYandexTelephonesIsIPhoneNegative() {
+        chromeDriver.get("https://market.yandex.ru/catalog--mobilnye-telefony/54726/list?text=телефоны");
+        PageFactoryMarketYandex pageFactoryYandex = PageFactory.initElements(chromeDriver, PageFactoryMarketYandex.class);
+
+        Steps.checkContainsNameNegative(pageFactoryYandex.getCollectResults(), "iphone" , chromeDriver);
+
+    }
 }
 

@@ -18,8 +18,7 @@ public class Steps {
         }
         else {
             CustomUtils.getScreen(driver);
-            Assertions.assertTrue(false
-                    , "Телефоны не выбраны");
+            Assertions.fail("Телефоны не выбраны");
         }
     }
     @Step("Шаг 1. Негативный. Проверка выбора телефонов ")
@@ -49,8 +48,8 @@ public class Steps {
 
     @Step("Шаг 2. Проверка наличия имени: {name} (негативный тест)")
     public static void checkContainsNameNegative(List<String> resultSearch, String name, WebDriver driver){
-        if(resultSearch.stream().anyMatch(x -> x.contains(name))){
-            Assertions.assertFalse(true, "Не должен быть найден: "+ name);
+        if(resultSearch.stream().peek(System.out::println).allMatch(x -> x.toLowerCase().contains(name))){
+            Assertions.assertFalse(true, "Если не выбраны " + name + " nо Все телефоны не могут быть "+ name);
             CustomUtils.getScreen(driver);
         }
         else {

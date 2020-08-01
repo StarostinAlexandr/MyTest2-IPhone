@@ -17,9 +17,9 @@ public class WebDriverSettings {
         System.setProperty("webdriver.chrome.driver",System.getenv("CHROME_DRIVER"));
         chromeDriver = new ChromeDriver();
         chromeDriver.manage().window().maximize();
-        chromeDriver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
-        chromeDriver.manage().timeouts().setScriptTimeout(40, TimeUnit.SECONDS);
-        chromeDriver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
+        chromeDriver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+        chromeDriver.manage().timeouts().setScriptTimeout(60, TimeUnit.SECONDS);
+        chromeDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     }
 
     @AfterEach
